@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: phone
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      MONGO_HOST: db
+      MONGO_PORT: 27017
+
+  db:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

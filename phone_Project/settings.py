@@ -88,8 +88,8 @@ connect(
     db="phone_data_db",
     username="",
     password="",
-    host="localhost",
-    port=27017
+    host=os.environ.get("MONGO_HOST", "localhost"),
+    port=int(os.environ.get("MONGO_PORT", 27017)),
 )
 
 
